@@ -40,9 +40,9 @@ void mode2(void);
 void mode3(void);
 void mode4(void);
 
-// the setup routine runs once when you press reset:
+// the setup routine runs on startup
 void setup() {
-  // use serial for debugging remove later
+  // start serial
   Serial.begin(9600);
 
   // initialize the digital button
@@ -60,11 +60,19 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  // degug println to see what mode
+  // debug println to see what mode
   Serial.println(mode);
+
+  // set interval to potentiometer input (0 - 1024) ms
   interval = analogRead(potentiometer);
-  time = millis();
+
+  // set button state to button input
   buttonState = digitalRead(button);
+
+  // begin interval time state
+  time = millis();
+
+  // update mode if button was pressed down
   if(buttonState == 1)
   {
     mode = (mode + 1) % 5;
@@ -145,6 +153,7 @@ void mode2(void)
 
 void mode3(void)
 // cycle through odd and even LED's
+// state will cycle between odd and even LED's
 {
   for (int j = 0; j < 2; j++)
   {
@@ -186,6 +195,7 @@ void mode4(void)
 {
   if (time - prev_time > interval)
   {
+    // generate random number, turn on that LED, and turn off the others
     randInt = random(3);
     prev_time = time;
     for (int i = 0; i < 3; i++)

@@ -153,6 +153,7 @@ void mode2(void)
 
 void mode3(void)
 // cycle through odd and even LED's
+// state will cycle between odd and even LED's
 {
   for (int j = 0; j < 2; j++)
   {
@@ -194,6 +195,7 @@ void mode4(void)
 {
   if (time - prev_time > interval)
   {
+    // generate random number, turn on that LED, and turn off the others
     randInt = random(3);
     prev_time = time;
     for (int i = 0; i < 3; i++)
