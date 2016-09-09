@@ -27,7 +27,7 @@ int buttonState = 0;
 // sets the mode of the LED.  Mode will range from 0-4 for the 5 modes.
 int mode = 0;
 
-// state keeps track of where we are inside a particular mode 
+// state keeps track of where we are inside a particular mode
 int state = 0;
 int randInt = 0;
 
@@ -46,7 +46,7 @@ void mode4(void);
 void setup() {
   // use serial for debugging remove later
   Serial.begin(9600);
-  
+
   // initialize the digital button
   pinMode(button, INPUT);
 
@@ -203,4 +203,3 @@ void mode4(void)
     }
   }
 }
-
