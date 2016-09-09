@@ -8,11 +8,7 @@ A bike LED with 5 featured modes.
 3 - cycle through odd and even LED's
 4 - random single LED
 
-This example code is in the public domain.
 */
-
-// Pin 13 has an LED connected on most Arduino boards.
-// give it a name:
 
 #include <stdlib.h>
 
@@ -29,6 +25,8 @@ int mode = 0;
 
 // state keeps track of where we are inside a particular mode
 int state = 0;
+
+// used in mode 4 to turn on an off random LED's
 int randInt = 0;
 
 // time related
@@ -42,9 +40,9 @@ void mode2(void);
 void mode3(void);
 void mode4(void);
 
-// the setup routine runs once when you press reset:
+// the setup routine runs on startup
 void setup() {
-  // use serial for debugging remove later
+  // start serial
   Serial.begin(9600);
 
   // initialize the digital button
@@ -62,11 +60,19 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  // degug println to see what mode
+  // debug println to see what mode
   Serial.println(mode);
+
+  // set interval to potentiometer input (0 - 1024) ms
   interval = analogRead(potentiometer);
-  time = millis();
+
+  // set button state to button input
   buttonState = digitalRead(button);
+
+  // begin interval time state
+  time = millis();
+
+  // update mode if button was pressed down
   if(buttonState == 1)
   {
     mode = (mode + 1) % 5;
